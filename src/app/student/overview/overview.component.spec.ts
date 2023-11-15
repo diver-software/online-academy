@@ -22,8 +22,9 @@ describe('OverviewComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should have title', () => {
+  it('should have the title "Students Overview"', () => {
     const title = fixture.nativeElement.querySelector('.tst-title')
     expect(title).toBeTruthy();
+    expect(title?.textContent).toContain('Students Overview');
   });
 });
