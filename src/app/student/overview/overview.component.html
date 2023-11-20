@@ -1,2 +1,4 @@
 <h1 class="tst-title">Students Overview</h1>
-<span class="tst-no-students">There are no students!</span>
+<ng-container *ngIf="students.length === 0">
+  <span class="tst-no-students">There are no students!</span>
+</ng-container>
