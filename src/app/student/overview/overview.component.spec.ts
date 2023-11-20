@@ -58,4 +58,12 @@ describe('OverviewComponent', () => {
     const noStudents = wrapperFixture.nativeElement.querySelector('.tst-no-students');
     expect(noStudents).toBeNull();
   });
+
+  it('Should display students', () => {
+    wrapperComponent.content = ['student1', 'student2'];
+    wrapperFixture.detectChanges();
+
+    const noStudents = wrapperFixture.nativeElement.querySelector('.tst-students');
+    expect(noStudents).toBeTruthy();
+  });
 });
