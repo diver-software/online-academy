@@ -60,10 +60,15 @@ describe('OverviewComponent', () => {
   });
 
   it('Should display students', () => {
-    wrapperComponent.content = ['student1', 'student2'];
+    const students = ['student1', 'student2'];
+    wrapperComponent.content = students;
     wrapperFixture.detectChanges();
 
-    const noStudents = wrapperFixture.nativeElement.querySelector('.tst-students');
-    expect(noStudents).toBeTruthy();
+    const studentElems: HTMLElement[] = wrapperFixture.nativeElement.querySelectorAll('.tst-student');
+    expect(studentElems).toBeTruthy();
+    expect(studentElems.length).toBe(students.length);
+    studentElems.forEach(htmlElem => {
+        expect(students.some(it => it === htmlElem?.textContent)).toBeTruthy()
+    });
   });
 });

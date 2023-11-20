@@ -4,6 +4,6 @@
   <span class="tst-no-students">There are no students!</span>
 </ng-container>
 
-<ng-container *ngIf="students.length > 0">
-  <div class="tst-students">There are no students!</div>
+<ng-container *ngFor="let student of students">
+  <span class="tst-student">{{ student }}</span>
 </ng-container>
