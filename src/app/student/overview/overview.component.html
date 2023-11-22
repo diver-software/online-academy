@@ -5,5 +5,7 @@
 </ng-container>
 
 <ng-container *ngFor="let student of students">
-  <span class="tst-student">{{ student }}</span>
+  <div class="tst-student">
+    <span class="tst-student-name">{{ student.name }}</span>
+  </div>
 </ng-container>
