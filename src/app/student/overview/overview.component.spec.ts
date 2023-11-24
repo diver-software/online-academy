@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { OverviewComponent } from './overview.component';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Student } from '../models/student.model';
+import { fakeStudents, Student } from '../models/student.model';
 
 @Component({
   selector: 'wrapper',
@@ -58,7 +58,7 @@ describe('OverviewComponent', () => {
   });
 
   it('Should display students', () => {
-    const students = [ { name: 'student1' }, { name: 'student2' } ];
+    const students = fakeStudents();
     wrapperComponent.content = students;
     wrapperFixture.detectChanges();
 
@@ -68,7 +68,7 @@ describe('OverviewComponent', () => {
   });
 
   it('Should show every student name', () => {
-    const students = [ { name: 'student1' }, { name: 'student2' } ];
+    const students = fakeStudents();
     wrapperComponent.content = students;
     wrapperFixture.detectChanges();
 
