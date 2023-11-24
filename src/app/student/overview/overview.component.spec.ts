@@ -1,8 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OverviewComponent, Student } from './overview.component';
+import { OverviewComponent } from './overview.component';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Student } from '../models/student.model';
 
 @Component({
   selector: 'wrapper',

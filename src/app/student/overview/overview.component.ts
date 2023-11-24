@@ -1,9 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-export interface Student {
-  name: string;
-}
+import { Student } from '../models/student.model';
 
 @Component({
   selector: 'students-dashboard',
