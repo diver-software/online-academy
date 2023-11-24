@@ -79,4 +79,43 @@ describe('OverviewComponent', () => {
       expect(students.some(student => student.name === elem?.textContent)).toBeTruthy();
     });
   });
+
+  it('Should show every student surname', () => {
+    const students = fakeStudents();
+    wrapperComponent.content = students;
+    wrapperFixture.detectChanges();
+
+    const studentNameElems: HTMLElement[] = wrapperFixture.nativeElement.querySelectorAll('.tst-student-surname');
+    expect(studentNameElems).toBeTruthy();
+    expect(studentNameElems.length).toBe(students.length);
+    studentNameElems.forEach(elem => {
+      expect(students.some(student => student.surname === elem?.textContent)).toBeTruthy();
+    });
+  });
+
+  it('Should show every student birthday', () => {
+    const students = fakeStudents();
+    wrapperComponent.content = students;
+    wrapperFixture.detectChanges();
+
+    const studentNameElems: HTMLElement[] = wrapperFixture.nativeElement.querySelectorAll('.tst-student-birthday');
+    expect(studentNameElems).toBeTruthy();
+    expect(studentNameElems.length).toBe(students.length);
+    studentNameElems.forEach(elem => {
+      expect(students.some(student => student.birthday.toDateString() === elem?.textContent)).toBeTruthy();
+    });
+  });
+
+  it('Should show every student enroll date', () => {
+    const students = fakeStudents();
+    wrapperComponent.content = students;
+    wrapperFixture.detectChanges();
+
+    const studentNameElems: HTMLElement[] = wrapperFixture.nativeElement.querySelectorAll('.tst-student-enroll-date');
+    expect(studentNameElems).toBeTruthy();
+    expect(studentNameElems.length).toBe(students.length);
+    studentNameElems.forEach(elem => {
+      expect(students.some(student => student.enrollDate.toDateString() === elem?.textContent)).toBeTruthy();
+    });
+  });
 });

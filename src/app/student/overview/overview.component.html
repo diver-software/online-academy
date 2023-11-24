@@ -7,5 +7,8 @@
 <ng-container *ngFor="let student of students">
   <div class="tst-student">
     <span class="tst-student-name">{{ student.name }}</span>
+    <span class="tst-student-surname">{{ student.surname }}</span>
+    <span class="tst-student-birthday">{{ student.birthday.toDateString() }}</span>
+    <span class="tst-student-enroll-date">{{ student.enrollDate.toDateString() }}</span>
   </div>
 </ng-container>
