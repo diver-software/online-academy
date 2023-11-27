@@ -1,14 +1,20 @@
 <h1 class="tst-title">Students Overview</h1>
 
-<ng-container *ngIf="props.students.length === 0">
-  <span class="tst-no-students">There are no students!</span>
+<ng-container *ngIf="props.loading; else content">
+  <span class="tst-loading-indicator">loading...</span>
 </ng-container>
 
-<ng-container *ngFor="let student of props.students">
-  <div class="tst-student">
-    <span class="tst-student-name">{{ student.name }}</span>
-    <span class="tst-student-surname">{{ student.surname }}</span>
-    <span class="tst-student-birthday">{{ student.birthday.toDateString() }}</span>
-    <span class="tst-student-enroll-date">{{ student.enrollDate.toDateString() }}</span>
-  </div>
-</ng-container>
+<ng-template #content>
+  <ng-container *ngIf="props.students.length === 0">
+    <span class="tst-no-students">There are no students!</span>
+  </ng-container>
+
+  <ng-container *ngFor="let student of props.students">
+    <div class="tst-student">
+      <span class="tst-student-name">{{ student.name }}</span>
+      <span class="tst-student-surname">{{ student.surname }}</span>
+      <span class="tst-student-birthday">{{ student.birthday.toDateString() }}</span>
+      <span class="tst-student-enroll-date">{{ student.enrollDate.toDateString() }}</span>
+    </div>
+  </ng-container>
+</ng-template>

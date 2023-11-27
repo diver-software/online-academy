@@ -123,4 +123,34 @@ describe('OverviewComponent', () => {
       expect(expected).toContain(student.enrollDate.toDateString());
     });
   });
+
+  it('Should show loading indicator', () => {
+    wrapperComponent.props = { students: [], loading: true };
+    wrapperFixture.detectChanges();
+
+    const loadingIndicator = wrapperFixture.debugElement
+      .query(By.css('.tst-loading-indicator'))
+
+    expect(loadingIndicator).toBeTruthy();
+  });
+
+  it('Should NOT show students when loading', () => {
+    wrapperComponent.props = { students: fakeStudents(), loading: true };
+    wrapperFixture.detectChanges();
+
+    const expected = wrapperFixture.debugElement
+      .queryAll(By.css('.tst-student'))
+
+    expect(expected.length).toBe(0);
+  });
+
+  it('Should NOT show no-students indicator when loading', () => {
+    wrapperComponent.props = { students: [], loading: true };
+    wrapperFixture.detectChanges();
+
+    const expected = wrapperFixture.debugElement
+      .query(By.css('.tst-no-students'))
+
+    expect(expected).toBeFalsy();
+  });
 });
