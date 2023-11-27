@@ -4,6 +4,7 @@ import { OverviewComponent } from './overview.component';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { fakeStudents, Student } from '../models/student.model';
+import { By } from '@angular/platform-browser';
 
 @Component({
   selector: 'wrapper',
@@ -72,11 +73,12 @@ describe('OverviewComponent', () => {
     wrapperComponent.content = students;
     wrapperFixture.detectChanges();
 
-    const studentNameElems: HTMLElement[] = wrapperFixture.nativeElement.querySelectorAll('.tst-student-name');
-    expect(studentNameElems).toBeTruthy();
-    expect(studentNameElems.length).toBe(students.length);
-    studentNameElems.forEach(elem => {
-      expect(students.some(student => student.name === elem?.textContent)).toBeTruthy();
+    const expected = wrapperFixture.debugElement
+      .queryAll(By.css('.tst-student-name'))
+      .map(it => it?.nativeElement?.textContent);
+
+    students.forEach(student => {
+      expect(expected).toContain(student.name);
     });
   });
 
@@ -85,11 +87,12 @@ describe('OverviewComponent', () => {
     wrapperComponent.content = students;
     wrapperFixture.detectChanges();
 
-    const studentNameElems: HTMLElement[] = wrapperFixture.nativeElement.querySelectorAll('.tst-student-surname');
-    expect(studentNameElems).toBeTruthy();
-    expect(studentNameElems.length).toBe(students.length);
-    studentNameElems.forEach(elem => {
-      expect(students.some(student => student.surname === elem?.textContent)).toBeTruthy();
+    const expected = wrapperFixture.debugElement
+      .queryAll(By.css('.tst-student-surname'))
+      .map(it => it?.nativeElement?.textContent);
+
+    students.forEach(student => {
+      expect(expected).toContain(student.surname);
     });
   });
 
@@ -98,11 +101,12 @@ describe('OverviewComponent', () => {
     wrapperComponent.content = students;
     wrapperFixture.detectChanges();
 
-    const studentNameElems: HTMLElement[] = wrapperFixture.nativeElement.querySelectorAll('.tst-student-birthday');
-    expect(studentNameElems).toBeTruthy();
-    expect(studentNameElems.length).toBe(students.length);
-    studentNameElems.forEach(elem => {
-      expect(students.some(student => student.birthday.toDateString() === elem?.textContent)).toBeTruthy();
+    const expected = wrapperFixture.debugElement
+      .queryAll(By.css('.tst-student-birthday'))
+      .map(it => it?.nativeElement?.textContent);
+
+    students.forEach(student => {
+      expect(expected).toContain(student.birthday.toDateString());
     });
   });
 
@@ -111,11 +115,12 @@ describe('OverviewComponent', () => {
     wrapperComponent.content = students;
     wrapperFixture.detectChanges();
 
-    const studentNameElems: HTMLElement[] = wrapperFixture.nativeElement.querySelectorAll('.tst-student-enroll-date');
-    expect(studentNameElems).toBeTruthy();
-    expect(studentNameElems.length).toBe(students.length);
-    studentNameElems.forEach(elem => {
-      expect(students.some(student => student.enrollDate.toDateString() === elem?.textContent)).toBeTruthy();
+    const expected = wrapperFixture.debugElement
+      .queryAll(By.css('.tst-student-enroll-date'))
+      .map(it => it?.nativeElement?.textContent);
+
+    students.forEach(student => {
+      expect(expected).toContain(student.enrollDate.toDateString());
     });
   });
 });
