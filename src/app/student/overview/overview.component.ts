@@ -2,6 +2,11 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Student } from '../models/student.model';
 
+interface Props {
+  students: Student[];
+  loading: boolean;
+}
+
 @Component({
   selector: 'students-dashboard',
   standalone: true,
@@ -12,5 +17,5 @@ import { Student } from '../models/student.model';
 })
 export class OverviewComponent {
   @Input()
-  students: Student[] = [];
+  props: Props = { students: [], loading: false };
 }

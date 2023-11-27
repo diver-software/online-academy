@@ -10,10 +10,10 @@ import { By } from '@angular/platform-browser';
   selector: 'wrapper',
   standalone: true,
   imports: [CommonModule, OverviewComponent],
-  template: '<students-dashboard [students]="content"></students-dashboard>'
+  template: '<students-dashboard [props]="props"></students-dashboard>'
 })
 class WrapperComponent {
-  content: Student[] = [];
+  props: { students: Student[], loading: boolean } = { students: [], loading: false };
 }
 
 describe('OverviewComponent', () => {
@@ -60,7 +60,7 @@ describe('OverviewComponent', () => {
 
   it('Should display students', () => {
     const students = fakeStudents();
-    wrapperComponent.content = students;
+    wrapperComponent.props = { students, loading: false };
     wrapperFixture.detectChanges();
 
     const studentElems: HTMLElement[] = wrapperFixture.nativeElement.querySelectorAll('.tst-student');
@@ -70,7 +70,7 @@ describe('OverviewComponent', () => {
 
   it('Should show every student name', () => {
     const students = fakeStudents();
-    wrapperComponent.content = students;
+    wrapperComponent.props = { students, loading: false };
     wrapperFixture.detectChanges();
 
     const expected = wrapperFixture.debugElement
@@ -84,7 +84,7 @@ describe('OverviewComponent', () => {
 
   it('Should show every student surname', () => {
     const students = fakeStudents();
-    wrapperComponent.content = students;
+        wrapperComponent.props = { students, loading: false };
     wrapperFixture.detectChanges();
 
     const expected = wrapperFixture.debugElement
@@ -98,7 +98,7 @@ describe('OverviewComponent', () => {
 
   it('Should show every student birthday', () => {
     const students = fakeStudents();
-    wrapperComponent.content = students;
+    wrapperComponent.props = { students, loading: false };
     wrapperFixture.detectChanges();
 
     const expected = wrapperFixture.debugElement
@@ -112,7 +112,7 @@ describe('OverviewComponent', () => {
 
   it('Should show every student enroll date', () => {
     const students = fakeStudents();
-    wrapperComponent.content = students;
+    wrapperComponent.props = { students, loading: false };
     wrapperFixture.detectChanges();
 
     const expected = wrapperFixture.debugElement

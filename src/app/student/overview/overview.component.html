@@ -1,10 +1,10 @@
 <h1 class="tst-title">Students Overview</h1>
 
-<ng-container *ngIf="students.length === 0">
+<ng-container *ngIf="props.students.length === 0">
   <span class="tst-no-students">There are no students!</span>
 </ng-container>
 
-<ng-container *ngFor="let student of students">
+<ng-container *ngFor="let student of props.students">
   <div class="tst-student">
     <span class="tst-student-name">{{ student.name }}</span>
     <span class="tst-student-surname">{{ student.surname }}</span>
