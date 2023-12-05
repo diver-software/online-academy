@@ -33,9 +33,18 @@ describe('OverviewComponent', () => {
     expect(studentsOverviewUi).toBeTruthy();
   });
 
-  it('should fetch students and pass them to the child component', () => {
-    const students = fakeStudents();
-    jest.spyOn(studentService, 'getStudents').mockReturnValue(of(students));
+  it('should pass initial data to the child component', async () => {
+    mockStudentService(new Observable());
+    fixture.detectChanges();
+
+    await fixture.whenStable();
+
+    const studentsOverviewUi: OverviewUiComponent = fixture.debugElement.query(
+      By.directive(OverviewUiComponent)
+    ).componentInstance;
+    expect(studentsOverviewUi.props.students).toEqual([]);
+    expect(studentsOverviewUi.props.loading).toBe(true);
+  });
 
   it('should fetch students and pass them to the child component', async () => {
     const students = fakeStudents();
