@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OverviewComponent } from './overview.component';
+import { OverviewUiComponent } from './overview-ui.component';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { fakeStudents, Student } from '../models/student.model';
@@ -9,27 +9,27 @@ import { By } from '@angular/platform-browser';
 @Component({
   selector: 'wrapper',
   standalone: true,
-  imports: [CommonModule, OverviewComponent],
-  template: '<students-overview [props]="props"></students-overview>'
+  imports: [CommonModule, OverviewUiComponent],
+  template: '<students-overview-ui [props]="props"></students-overview-ui>'
 })
 class WrapperComponent {
   props: { students: Student[], loading: boolean } = { students: [], loading: false };
 }
 
 describe('OverviewComponent', () => {
-  let component: OverviewComponent;
-  let fixture: ComponentFixture<OverviewComponent>;
+  let component: OverviewUiComponent;
+  let fixture: ComponentFixture<OverviewUiComponent>;
 
   let wrapperFixture: ComponentFixture<WrapperComponent>;
   let wrapperComponent: WrapperComponent;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [OverviewComponent, WrapperComponent]
+      imports: [OverviewUiComponent, WrapperComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(OverviewComponent);
+    fixture = TestBed.createComponent(OverviewUiComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
 

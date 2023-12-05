@@ -8,14 +8,14 @@ interface Props {
 }
 
 @Component({
-  selector: 'students-overview',
+  selector: 'students-overview-ui',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './overview.component.html',
+  templateUrl: './overview-ui.component.html',
   styleUrl: './overview.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class OverviewComponent {
+export class OverviewUiComponent {
   @Input()
   props: Props = { students: [], loading: false };
 }
