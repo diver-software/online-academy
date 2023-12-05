@@ -23,7 +23,7 @@ describe('OverviewComponent', () => {
   });
 
   it('should use an ui component', () => {
-    const studentsOverviewUi = fixture.nativeElement.querySelector('students-overview-ui');
+    const studentsOverviewUi = fixture.debugElement.query(By.directive(OverviewUiComponent));
     expect(studentsOverviewUi).toBeTruthy();
   });
 });
