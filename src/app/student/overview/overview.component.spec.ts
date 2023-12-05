@@ -10,7 +10,7 @@ import { By } from '@angular/platform-browser';
   selector: 'wrapper',
   standalone: true,
   imports: [CommonModule, OverviewComponent],
-  template: '<students-dashboard [props]="props"></students-dashboard>'
+  template: '<students-overview [props]="props"></students-overview>'
 })
 class WrapperComponent {
   props: { students: Student[], loading: boolean } = { students: [], loading: false };
