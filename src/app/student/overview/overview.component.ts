@@ -8,7 +8,7 @@ interface Props {
 }
 
 @Component({
-  selector: 'students-dashboard',
+  selector: 'students-overview',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './overview.component.html',
