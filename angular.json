@@ -75,6 +75,12 @@
           "options": {
             "buildTarget": "online-academy:build"
           }
+        },
+        "test": {
+          "builder": "@angular-builders/jest:run",
+          "options": {
+            "configPath": "./jest.config.ts"
+          }
         }
       }
     }
