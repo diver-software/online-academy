@@ -1,0 +1,5 @@
+@if (loading()) {
+  <bootstrap-loading-ui></bootstrap-loading-ui>
+} @else {
+  <student-list-bootstrap-ui [students]="students()"></student-list-bootstrap-ui>
+}
