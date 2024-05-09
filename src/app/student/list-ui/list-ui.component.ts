@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'student-list-ui',
+  selector: 'student-list-ui[students]',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './list-ui.component.html',
@@ -10,5 +10,6 @@ import { CommonModule } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListUiComponent {
-
+  @Input({ required: true })
+  students!: any[];
 }

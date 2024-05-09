@@ -1,0 +1,10 @@
+@if (students.length == 0) {
+  <div id="tst-none-students">
+    <p>No students to show</p>
+  </div>
+}
+@for (student of students; track student.id) {
+  <div>
+    <span><b>First name:</b>&nbsp;{{student.firstname}}</span>
+  </div>
+}

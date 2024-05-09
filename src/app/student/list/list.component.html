@@ -1,1 +1,3 @@
-<p>list works!</p>
+@if(students$ | async; as students) {
+  <student-list-ui [students]="students"></student-list-ui>
+}
