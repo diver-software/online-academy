@@ -31,8 +31,8 @@ describe('ListComponent', () => {
   });
 
   it('Should NOT print "No students to show" when there are students', () => {
-    const student1 = { id: 1, firstname: "test2" };
-    const student2 = { id: 2, firstname: "test2" };
+    const student1 = { id: 1, firstname: "test2", lastname: "test3" };
+    const student2 = { id: 2, firstname: "test2", lastname: "test3" };
     component.students$.next([student1, student2]);
     fixture.detectChanges();
 
@@ -41,11 +41,20 @@ describe('ListComponent', () => {
   });
 
   it('Should print student first name', () => {
-    const student = { id: 1, firstname: "test2" };
+    const student = { id: 1, firstname: "test2", lastname: "test3" };
     component.students$.next([student]);
     fixture.detectChanges();
 
     const ne = fixture.debugElement.query(By.css("#tst-student-"+student.id))?.nativeElement as HTMLElement;
     expect(ne.textContent).toContain(student.firstname);
+  });
+
+  it('Should print student first name', () => {
+    const student = { id: 1, firstname: "test2", lastname: "lastname" };
+    component.students$.next([student]);
+    fixture.detectChanges();
+
+    const ne = fixture.debugElement.query(By.css("#tst-student-"+student.id))?.nativeElement as HTMLElement;
+    expect(ne.textContent).toContain(student.lastname);
   });
 });

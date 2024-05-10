@@ -6,5 +6,6 @@
 @for (student of students; track student.id) {
   <div [attr.id]="'tst-student-' + student.id">
     <span><b>First name:</b>&nbsp;{{student.firstname}}</span>
+    <span><b>Last name:</b>&nbsp;{{student.lastname}}</span>
   </div>
 }
