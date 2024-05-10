@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ListUiComponent } from '../list-ui/list-ui.component';
 import { BehaviorSubject } from 'rxjs';
+import { Student } from '../../models/student.model';
 
 @Component({
   selector: 'student-list',
@@ -12,5 +13,5 @@ import { BehaviorSubject } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListComponent {
-  students$ = new BehaviorSubject<any[]>([]);
+  students$ = new BehaviorSubject<Student[]>([]);
 }

@@ -4,7 +4,7 @@
   </div>
 }
 @for (student of students; track student.id) {
-  <div>
+  <div [attr.id]="'tst-student-' + student.id">
     <span><b>First name:</b>&nbsp;{{student.firstname}}</span>
   </div>
 }

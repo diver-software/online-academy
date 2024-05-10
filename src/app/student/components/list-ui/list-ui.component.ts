@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Student } from '../../models/student.model';
 
 @Component({
   selector: 'student-list-ui[students]',
@@ -11,5 +12,5 @@ import { CommonModule } from '@angular/common';
 })
 export class ListUiComponent {
   @Input({ required: true })
-  students!: any[];
+  students!: Student[];
 }

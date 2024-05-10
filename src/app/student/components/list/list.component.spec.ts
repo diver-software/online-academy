@@ -31,10 +31,21 @@ describe('ListComponent', () => {
   });
 
   it('Should NOT print "No students to show" when there are students', () => {
-    component.students$.next(["student1", "student2"]);
+    const student1 = { id: 1, firstname: "test2" };
+    const student2 = { id: 2, firstname: "test2" };
+    component.students$.next([student1, student2]);
     fixture.detectChanges();
 
     const ne = fixture.debugElement.query(By.css("#tst-none-students"))?.nativeElement as HTMLElement;
     expect(ne).toBeFalsy();
+  });
+
+  it('Should print student first name', () => {
+    const student = { id: 1, firstname: "test2" };
+    component.students$.next([student]);
+    fixture.detectChanges();
+
+    const ne = fixture.debugElement.query(By.css("#tst-student-"+student.id))?.nativeElement as HTMLElement;
+    expect(ne.textContent).toContain(student.firstname);
   });
 });
