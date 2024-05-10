@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ListComponent } from './list.component';
 import { By } from '@angular/platform-browser';
+import { genStudents } from '../../models/student.model';
 
 describe('ListComponent', () => {
   let component: ListComponent;
@@ -31,9 +32,7 @@ describe('ListComponent', () => {
   });
 
   it('Should NOT print "No students to show" when there are students', () => {
-    const student1 = { id: 1, firstname: "test2", lastname: "test3" };
-    const student2 = { id: 2, firstname: "test2", lastname: "test3" };
-    component.students$.next([student1, student2]);
+    component.students$.next(genStudents());
     fixture.detectChanges();
 
     const ne = fixture.debugElement.query(By.css("#tst-none-students"))?.nativeElement as HTMLElement;
@@ -41,20 +40,24 @@ describe('ListComponent', () => {
   });
 
   it('Should print student first name', () => {
-    const student = { id: 1, firstname: "test2", lastname: "test3" };
-    component.students$.next([student]);
+    const students = genStudents()
+    component.students$.next(students);
     fixture.detectChanges();
 
-    const ne = fixture.debugElement.query(By.css("#tst-student-"+student.id))?.nativeElement as HTMLElement;
-    expect(ne.textContent).toContain(student.firstname);
+    students.forEach((student) => {
+      const ne = fixture.debugElement.query(By.css("#tst-student-"+student.id))?.nativeElement as HTMLElement;
+      expect(ne.textContent).toContain(student.firstname);
+    });
   });
 
   it('Should print student first name', () => {
-    const student = { id: 1, firstname: "test2", lastname: "lastname" };
-    component.students$.next([student]);
+    const students = genStudents()
+    component.students$.next(students);
     fixture.detectChanges();
 
-    const ne = fixture.debugElement.query(By.css("#tst-student-"+student.id))?.nativeElement as HTMLElement;
-    expect(ne.textContent).toContain(student.lastname);
+    students.forEach((student) => {
+      const ne = fixture.debugElement.query(By.css("#tst-student-"+student.id))?.nativeElement as HTMLElement;
+      expect(ne.textContent).toContain(student.lastname);
+    });
   });
 });
