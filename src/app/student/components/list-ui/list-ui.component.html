@@ -5,7 +5,12 @@
 }
 @for (student of students; track student.id) {
   <div [attr.id]="'tst-student-' + student.id">
-    <span><b>First name:</b>&nbsp;{{student.firstname}}</span>
-    <span><b>Last name:</b>&nbsp;{{student.lastname}}</span>
+    <div>
+      <img [ngSrc]="student.profilePictureUrl" width="150" height="150" alt="Profile Picture">
+    </div>
+    <span><b>Firstname:</b>&nbsp;{{student.firstname}}</span><br>
+    <span><b>Lastname:</b>&nbsp;{{student.lastname}}</span><br>
+    <span><b>Date of Birth:</b>&nbsp;{{student.birthDate.toDateString()}}</span><br>
+    <span><b>Enrollment Date:</b>&nbsp;{{student.enrolmentDate.toDateString()}}</span>
   </div>
 }

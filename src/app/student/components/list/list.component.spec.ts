@@ -39,7 +39,7 @@ describe('ListComponent', () => {
     expect(ne).toBeFalsy();
   });
 
-  it('Should print student first name', () => {
+  it('Should print student\'s firstname', () => {
     const students = genStudents()
     component.students$.next(students);
     fixture.detectChanges();
@@ -50,7 +50,7 @@ describe('ListComponent', () => {
     });
   });
 
-  it('Should print student first name', () => {
+  it('Should print student\'s lastname', () => {
     const students = genStudents()
     component.students$.next(students);
     fixture.detectChanges();
@@ -58,6 +58,41 @@ describe('ListComponent', () => {
     students.forEach((student) => {
       const ne = fixture.debugElement.query(By.css("#tst-student-"+student.id))?.nativeElement as HTMLElement;
       expect(ne.textContent).toContain(student.lastname);
+    });
+  });
+
+  it('Should print student\'s date of birth e.g. "Wed Jun 14 2017"', () => {
+    const students = genStudents()
+    component.students$.next(students);
+    fixture.detectChanges();
+
+    students.forEach((student) => {
+      const ne = fixture.debugElement.query(By.css("#tst-student-"+student.id))?.nativeElement as HTMLElement;
+      expect(ne.textContent).toContain(student.birthDate.toDateString());
+    });
+  });
+
+  it('Should print student\'s enrollment date e.g. "Wed Jun 14 2017"', () => {
+    const students = genStudents()
+    component.students$.next(students);
+    fixture.detectChanges();
+
+    students.forEach((student) => {
+      const ne = fixture.debugElement.query(By.css("#tst-student-"+student.id))?.nativeElement as HTMLElement;
+      expect(ne.textContent).toContain(student.enrolmentDate.toDateString());
+    });
+  });
+
+  it('Should print student\'s profile Picture', () => {
+    const students = genStudents()
+    component.students$.next(students);
+    fixture.detectChanges();
+
+    students.forEach((student) => {
+      const ne = fixture.debugElement
+        .query(By.css("#tst-student-"+student.id))
+        .query(By.css("img")).nativeElement as HTMLElement;
+      expect(ne.getAttribute("src")).toContain(student.profilePictureUrl);
     });
   });
 });
