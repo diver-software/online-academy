@@ -23,76 +23,67 @@ describe('ListComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('Should print "No students to show" when there are no students', () => {
-    component.students$.next([]);
-    fixture.detectChanges();
+  describe('"No students to show" banner', () => {
+    it('Should print "No students to show" when there are no students', () => {
+      component.students$.next([]);
+      fixture.detectChanges();
 
-    const ne = fixture.debugElement.query(By.css("#tst-none-students"))?.nativeElement as HTMLElement;
-    expect(ne.textContent).toContain("No students to show");
-  });
+      const ne = fixture.debugElement.query(By.css('#tst-none-students'))?.nativeElement as HTMLElement;
+      expect(ne.textContent).toContain("No students to show");
+    });
 
-  it('Should NOT print "No students to show" when there are students', () => {
-    component.students$.next(genStudents());
-    fixture.detectChanges();
+    it('Should NOT print "No students to show" when there are students', () => {
+      component.students$.next(genStudents(1));
+      fixture.detectChanges();
 
-    const ne = fixture.debugElement.query(By.css("#tst-none-students"))?.nativeElement as HTMLElement;
-    expect(ne).toBeFalsy();
-  });
-
-  it('Should print student\'s firstname', () => {
-    const students = genStudents()
-    component.students$.next(students);
-    fixture.detectChanges();
-
-    students.forEach((student) => {
-      const ne = fixture.debugElement.query(By.css("#tst-student-"+student.id))?.nativeElement as HTMLElement;
-      expect(ne.textContent).toContain(student.firstname);
+      const ne = fixture.debugElement.query(By.css('#tst-none-students'))?.nativeElement as HTMLElement;
+      expect(ne).toBeFalsy();
     });
   });
 
-  it('Should print student\'s lastname', () => {
-    const students = genStudents()
-    component.students$.next(students);
-    fixture.detectChanges();
+  describe('Student\'s properties', () => {
+    let students = genStudents()
 
-    students.forEach((student) => {
-      const ne = fixture.debugElement.query(By.css("#tst-student-"+student.id))?.nativeElement as HTMLElement;
-      expect(ne.textContent).toContain(student.lastname);
+    beforeEach(() => {
+      component.students$.next(students);
+      fixture.detectChanges();
     });
-  });
 
-  it('Should print student\'s date of birth e.g. "Wed Jun 14 2017"', () => {
-    const students = genStudents()
-    component.students$.next(students);
-    fixture.detectChanges();
-
-    students.forEach((student) => {
-      const ne = fixture.debugElement.query(By.css("#tst-student-"+student.id))?.nativeElement as HTMLElement;
-      expect(ne.textContent).toContain(student.birthDate.toDateString());
+    it('Should print student\'s firstname', () => {
+      students.forEach((student) => {
+        const ne = fixture.debugElement.query(By.css('#tst-student-'+student.id))?.nativeElement as HTMLElement;
+        expect(ne.textContent).toContain(student.firstname);
+      });
     });
-  });
 
-  it('Should print student\'s enrollment date e.g. "Wed Jun 14 2017"', () => {
-    const students = genStudents()
-    component.students$.next(students);
-    fixture.detectChanges();
-
-    students.forEach((student) => {
-      const ne = fixture.debugElement.query(By.css("#tst-student-"+student.id))?.nativeElement as HTMLElement;
-      expect(ne.textContent).toContain(student.enrolmentDate.toDateString());
+    it('Should print student\'s lastname', () => {
+      students.forEach((student) => {
+        const ne = fixture.debugElement.query(By.css('#tst-student-'+student.id))?.nativeElement as HTMLElement;
+        expect(ne.textContent).toContain(student.lastname);
+      });
     });
-  });
 
-  it('Should print student\'s profile Picture', () => {
-    const students = genStudents()
-    component.students$.next(students);
-    fixture.detectChanges();
+    it('Should print student\'s date of birth e.g. "Wed Jun 14 2017"', () => {
+      students.forEach((student) => {
+        const ne = fixture.debugElement.query(By.css('#tst-student-'+student.id))?.nativeElement as HTMLElement;
+        expect(ne.textContent).toContain(student.birthDate.toDateString());
+      });
+    });
 
-    students.forEach((student) => {
-      const ne = fixture.debugElement
-        .query(By.css("#tst-student-"+student.id))
-        .query(By.css("img")).nativeElement as HTMLElement;
-      expect(ne.getAttribute("src")).toContain(student.profilePictureUrl);
+    it('Should print student\'s enrollment date e.g. "Wed Jun 14 2017"', () => {
+      students.forEach((student) => {
+        const ne = fixture.debugElement.query(By.css('#tst-student-'+student.id))?.nativeElement as HTMLElement;
+        expect(ne.textContent).toContain(student.enrolmentDate.toDateString());
+      });
+    });
+
+    it('Should print student\'s profile Picture', () => {
+      students.forEach((student) => {
+        const ne = fixture.debugElement
+          .query(By.css('#tst-student-'+student.id))
+          .query(By.css('img')).nativeElement as HTMLElement;
+        expect(ne.getAttribute('src')).toContain(student.profilePictureUrl);
+      });
     });
   });
 });
