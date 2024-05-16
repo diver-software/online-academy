@@ -3,27 +3,30 @@
     <bootstrap-info-alert-ui msg="No students to show"></bootstrap-info-alert-ui>
   </div>
 }
+
 @for (student of students; track student.id) {
-  <div [attr.id]="'tst-student-' + student.id" class="container">
-    <div class="row gap-2">
-      <div class="col">
-        <img [ngSrc]="student.profilePictureUrl" width="150" height="150" alt="Profile Picture">
-      </div>
+  <div [attr.id]="'tst-student-' + student.id">
+    <div class="card p-3 m-3 rounded">
+      <div class="d-flex align-items-center">
+        <div class="image">
+          <img [ngSrc]="student.profilePictureUrl" width="150" height="150" class="img-fluid rounded-start" alt="Profile Picture">
+        </div>
 
-      <div class="col-2">
-          <span>{{ student.firstname }}</span>
-      </div>
+        <div class="ml-3 w-100">
+          <h4 class="mb-0 mt-0">{{ student.firstname }} {{ student.lastname }}</h4>
 
-      <div class="col-2">
-        <span>{{ student.lastname }}</span>
-      </div>
+          <div class="p-2 mt-2 d-flex flex-column rounded digest">
+            <div>
+              <span>Born on </span>
+              <strong>{{ student.birthDate.toDateString() }}</strong>
+            </div>
 
-      <div class="col-3">
-        <span>{{ student.birthDate.toDateString() }}</span>
-      </div>
-
-      <div class="col-3">
-        <span>{{ student.enrolmentDate.toDateString() }}</span>
+            <div>
+              <span>Enrolled on </span>
+              <strong>{{ student.enrolmentDate.toDateString() }}</strong>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
