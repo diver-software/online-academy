@@ -2,17 +2,16 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Student } from '../../models/student.model';
 import { BootstrapInfoAlertUiComponent } from '../../../shared/components/bootstrap-info-alert-ui/bootstrap-info-alert-ui.component';
-import { CardBootstrapUiComponent } from '../card-bootstrap-ui/card-bootstrap-ui.component';
 
 @Component({
-  selector: 'student-list-bootstrap-ui[students]',
+  selector: 'student-card-bootstrap-ui[student]',
   standalone: true,
-  imports: [CommonModule, NgOptimizedImage, BootstrapInfoAlertUiComponent, CardBootstrapUiComponent],
-  templateUrl: './list-bootstrap-ui.component.html',
-  styleUrl: './list-bootstrap-ui.component.scss',
+  imports: [CommonModule, NgOptimizedImage, BootstrapInfoAlertUiComponent],
+  templateUrl: './card-bootstrap-ui.component.html',
+  styleUrl: './card-bootstrap-ui.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ListBootstrapUiComponent {
+export class CardBootstrapUiComponent {
   @Input({ required: true })
-  students!: Student[];
+  student!: Student;
 }
