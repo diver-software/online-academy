@@ -5,7 +5,7 @@
 }
 
 @for (student of students; track student.id) {
-  <div [attr.id]="'tst-student-' + student.id">
+  <div [attr.id]="'tst-student-' + student.id" class="d-flex flex-row justify-content-center m-2">
     <student-card-bootstrap-ui [student]="student"></student-card-bootstrap-ui>
   </div>
 }
