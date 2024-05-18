@@ -1,8 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BehaviorSubject } from 'rxjs';
-import { Student } from '../../models/student.model';
 import { ListBootstrapUiComponent } from '../list-bootstrap-ui/list-bootstrap-ui.component';
+import { StudentService } from '../../services/student';
 
 @Component({
   selector: 'student-list',
@@ -13,5 +12,6 @@ import { ListBootstrapUiComponent } from '../list-bootstrap-ui/list-bootstrap-ui
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListComponent {
-  students$ = new BehaviorSubject<Student[]>([]);
+  private studentService: StudentService = inject(StudentService);
+  students$ = this.studentService.getAll();
 }

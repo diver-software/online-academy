@@ -2,51 +2,59 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ListComponent } from './list.component';
 import { By } from '@angular/platform-browser';
-import { genStudents } from '../../models/student.model';
+import { genStudents, Student } from '../../models/student.model';
+import { of } from 'rxjs';
+import { StudentService } from '../../services/student';
+
+type TestObjects = {
+  component: ListComponent;
+  fixture: ComponentFixture<ListComponent>;
+}
 
 describe('ListComponent', () => {
-  let component: ListComponent;
-  let fixture: ComponentFixture<ListComponent>;
+  const studentServiceMock = { getAll: jest.fn() };
+
+  function createTestObjects(students: Student[] = []): TestObjects {
+    studentServiceMock.getAll.mockReturnValueOnce(of(students));
+    const fixture = TestBed.createComponent(ListComponent);
+    const component = fixture.componentInstance;
+    fixture.detectChanges();
+    return { fixture, component };
+  }
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ListComponent]
+      imports: [ListComponent],
+      providers: [{ provide: StudentService, useValue: studentServiceMock }],
     })
     .compileComponents();
-    
-    fixture = TestBed.createComponent(ListComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
+    const { component } = createTestObjects();
     expect(component).toBeTruthy();
   });
 
   describe('"No students to show" banner', () => {
     it('Should print "No students to show" when there are no students', () => {
-      component.students$.next([]);
-      fixture.detectChanges();
-
+      const { fixture } = createTestObjects([]);
       const ne = fixture.debugElement.query(By.css('#tst-none-students'))?.nativeElement as HTMLElement;
       expect(ne.textContent).toContain("No students to show");
     });
 
     it('Should NOT print "No students to show" when there are students', () => {
-      component.students$.next(genStudents(1));
-      fixture.detectChanges();
-
+      const { fixture } = createTestObjects(genStudents(1));
       const ne = fixture.debugElement.query(By.css('#tst-none-students'))?.nativeElement as HTMLElement;
       expect(ne).toBeFalsy();
     });
   });
 
   describe('Student\'s properties', () => {
-    let students = genStudents()
+    let students = genStudents();
+    let fixture: ComponentFixture<ListComponent>;
 
     beforeEach(() => {
-      component.students$.next(students);
-      fixture.detectChanges();
+      fixture = createTestObjects(students).fixture;
     });
 
     it('Should print student\'s firstname', () => {
