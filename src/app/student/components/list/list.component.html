@@ -1,3 +1,5 @@
-@if(students$ | async; as students) {
-  <student-list-bootstrap-ui [students]="students"></student-list-bootstrap-ui>
+@if (loading()) {
+  <div id="tst-loading">Loading...</div>
+} @else {
+  <student-list-bootstrap-ui [students]="students()"></student-list-bootstrap-ui>
 }
