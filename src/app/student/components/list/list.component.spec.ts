@@ -104,12 +104,12 @@ describe('ListComponent', () => {
 
     it('Should print loading indicator while student\'s data is being requested', () => {
       const fixture = createTestObjects(students$.asObservable()).fixture;
-      let ne = fixture.debugElement.query(By.css('#tst-loading'))?.nativeElement as HTMLElement;
+      let ne = fixture.debugElement.query(By.css('.tst-loading'))?.nativeElement as HTMLElement;
       expect(ne).toBeTruthy();
 
       students$.next([]);
       fixture.detectChanges();
-      ne = fixture.debugElement.query(By.css('#tst-loading'))?.nativeElement as HTMLElement;
+      ne = fixture.debugElement.query(By.css('.tst-loading'))?.nativeElement as HTMLElement;
       expect(ne).toBeFalsy();
     });
   });

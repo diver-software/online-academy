@@ -5,11 +5,12 @@ import { StudentService } from '../../services/student';
 import { Observable, tap } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Student } from '../../models/student.model';
+import { BootstrapLoadingUiComponent } from '../../../shared/components/bootstrap-loading-ui/bootstrap-loading-ui.component';
 
 @Component({
   selector: 'student-list',
   standalone: true,
-  imports: [CommonModule, ListBootstrapUiComponent],
+  imports: [CommonModule, ListBootstrapUiComponent, BootstrapLoadingUiComponent],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
