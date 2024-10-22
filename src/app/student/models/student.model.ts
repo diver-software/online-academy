@@ -1,22 +1,36 @@
-import * as fc from 'fast-check';
+import * as S from '@effect/schema/Schema';
+import * as A from '@effect/schema/Arbitrary';
+import * as FC from '@effect/schema/FastCheck';
 
-export interface Student {
-  id: number;
-  firstname: string;
-  lastname: string;
-  birthDate: Date;
-  enrolmentDate: Date;
-  profilePictureUrl: string;
-}
+const StudentId = S.Int.pipe(
+  S.positive(),
+  S.brand('StudentId')
+);
+type StudentId = S.Schema.Type<typeof StudentId>;
 
-
-const StudentsArb:  fc.Arbitrary<Student> = fc.record({
-  id: fc.integer({ min: 1 }).noBias(),
-  firstname: fc.string({ minLength: 3 }),
-  lastname: fc.string({ minLength: 3 }),
-  birthDate: fc.date(),
-  enrolmentDate: fc.date(),
-  profilePictureUrl: fc.webUrl(),
+export const Student = S.Struct({
+  id: StudentId,
+  firstname: S.NonEmpty,
+  lastname: S.NonEmpty,
+  birthDate: S.DateFromString,
+  enrolmentDate: S.DateFromString,
+  profilePictureUrl: S.NonEmpty.annotations({
+    arbitrary: () => (fc) => fc.webUrl()
+  })
 });
+export type Student = S.Schema.Type<typeof Student>;
 
-export const genStudents = (length: number = 20) => fc.sample(StudentsArb, length);
+const StudentAbr: FC.Arbitrary<Student> = A.make(Student);
+
+export const genStudents = (length: number = 20) =>
+  FC.sample(
+    FC.uniqueArray(
+      StudentAbr,
+      {
+        selector: (student) => student.id,
+        maxLength: length,
+        minLength: length
+      }
+    ),
+    1
+  )[0];
